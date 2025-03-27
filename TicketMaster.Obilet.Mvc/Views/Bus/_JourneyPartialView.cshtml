@@ -1,0 +1,113 @@
+﻿@using TicketMaster.Obilet.Mvc.Models.Api;
+@using System.Linq;
+@model BaseResponse<List<JourneyResponse>>
+@{
+    ViewData["Title"] = "Sefer Seçimi";
+}
+
+<div class="ticket-container container">
+
+    @foreach (var ticket in Model?.Data)
+    {
+        <div class="ticket ">
+            <div class="ticket-header row">
+                <div class="ticket-item col-3">
+                    <img src="https://s3.eu-central-1.amazonaws.com/static.obilet.com/images/partner/@ticket.PartnerId-sm.png" alt="logo" />
+                </div>
+
+                <div class="ticket-item col-2 text-right">
+                    <p class="text-origin-destination">KALKIŞ</p>
+                    <p class="text-time">@ticket.Journey.Departure?.ToString("hh:mm")</p>
+                </div>
+                <div class="ticket-item col-1">
+                    <span class="arrow-seperator">→</span>
+                </div>
+                <div class="ticket-item col-2">
+                    <p class ="text-origin-destination">VARIŞ</p>
+                    <p class="text-time">@ticket.Journey.Arrival?.ToString("hh:mm")</p>
+                </div>
+                <div class="ticket-item price col-4">
+                    <span class="ticket-price">@ticket.Journey.InternetPrice.ToString("n2") TL</span>
+                </div>
+            </div>
+            <div class="ticket-info row">
+                <div class="col-">@ticket.Journey.Origin - @ticket.Journey.Destination</div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+<style>
+    .ticket-container {
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+    }
+
+    .header {
+        background-color: #1E4DB7;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 20px;
+    }
+
+    .ticket {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #fff;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .ticket-header {
+      /*   display: flex;
+        justify-content: space-between; */
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .ticket-price {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .ticket-info {
+        font-size: 14px;
+        color: #555;
+    }
+
+    .ticket-item.price {
+       text-align:right;
+    }
+
+    .ticket-item img{
+        width:100%;
+    }
+
+    .ticket-item p {
+        margin-bottom: 0rem;
+    }
+    .ticket-item .text-origin-destination{
+        color: #3640B1;
+        font-size:9pt;
+    }
+
+    .ticket-item .text-time {
+        color: #192289;
+        font-size:15pt;
+    }
+
+    .ticket-item .arrow-seperator{
+        font-size: 17pt;
+    }
+
+    .ticket-item.text-right {
+        text-align: right;
+    }
+</style>
